@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const DEFAULT_USER = {
-    name: "mil",
+    name: "admin",
     password: "123"
 }
 
