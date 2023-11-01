@@ -1,11 +1,14 @@
 const express = require("express");
 const path = require("path");
+const mongoose = require('mongoose'); // Agrega esta línea
 const app = express();
 const LogInCollection = require("./mongo");
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+mongoose.connect('mongodb://localhost/tu-basededatos', { useNewUrlParser: true, useUnifiedTopology: true }); // Reemplaza con tu URL de conexión
 
 const tempelatePath = path.join(__dirname, '../tempelates');
 const publicPath = path.join(__dirname, '../public');
