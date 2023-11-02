@@ -64,3 +64,9 @@ app.post('/login', async (req, res) => {
 app.listen(port, () => {
     console.log('Server is running on port ' + port);
 });
+
+mongoose.connection.close(function () {
+    // Abrir una nueva conexión con una cadena de conexión diferente
+    mongoose.connect('nueva_cadena_de_conexion', { useNewUrlParser: true, useUnifiedTopology: true });
+  });
+  mongoose.connect('cadena_de_conexion', { useNewUrlParser: true, useUnifiedTopology: true });
