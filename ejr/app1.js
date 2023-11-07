@@ -4,10 +4,20 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-// Conectar a la base de datos MongoDB
-mongoose.connect('mongodb://localhost/tu_basededatos', { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Crear un modelo de datos
+
+const mongoose = require('mongoose');
+
+const connectionString = 'mongodb://localhost:27017/mydb';
+
+
+if (mongoose.connection.readyState === 1) {
+
+  return mongoose.connection;
+}
+
+return mongoose.openUri(connectionString);
+
 const Datos = mongoose.model('Datos', {
     edad: Number,
     datosBancarios: String
