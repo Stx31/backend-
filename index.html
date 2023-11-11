@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Nombre</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Frontend</h1>
-  <button id="getDataBtn">Obtener Datos</button>
-  <p id="data"></p>
-
-  <script src="frontend.js"></script>
+    <div class="container">
+        <div class="form-container">
+            <h1>Ingresa tu nombre</h1>
+            <form id="nameForm">
+                <input type="text" id="nameInput" placeholder="Tu nombre" required>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
