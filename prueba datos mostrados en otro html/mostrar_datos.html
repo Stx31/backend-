@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mostrar Datos</title>
+</head>
+<body>
+    <h1>Datos Guardados:</h1>
+    <div id="datosMostrados"></div>
+
+    <script>
+        fetch('http://localhost:3000/obtener-datos')
+            .then(response => response.json())
+            .then(data => {
+                const datosMostrados = document.getElementById('datosMostrados');
+                datosMostrados.innerHTML = `Nombre: ${data.nombre}<br>Edad: ${data.edad}`;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
