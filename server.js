@@ -3,21 +3,29 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const nombresGuardados = [];
+let data = [];
 
-app.post('/guardar-nombre', (req, res) => {
-    const { name } = req.body;
-    nombresGuardados.push(name);
-    res.json({ message: 'Nombre guardado con éxito' });
+app.get('/obtener-datos', (req, res) => {
+   
+    res.json(data);
 });
 
-app.get('/obtener-nombres', (req, res) => {
-    res.json({ nombres: nombresGuardados });
+app.post('/guardar-datos', (req, res) => {
+    const newData = req.body;
+    data.push(newData);
+    console.log('Datos guardados:', newData);
+    res.json({ mensaje: 'Datos guardados correctamente' });
+});
+
+app.delete('/borrar-datos', (req, res) => {
+   
+    data = [];
+    console.log('Datos borrados');
+    res.json({ mensaje: 'Datos borrados correctamente' });
 });
 
 app.listen(port, () => {
-    console.log(`Servidor en ejecución en http://localhost:${port}`);
+    console.log(`Servidor escuchando en http://localhost:${port}`);
 });
