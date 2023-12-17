@@ -13,7 +13,16 @@ let autoresGuardados = [];
 
 app.post('/guardarPost', (req, res) => {
     const { author, title, message, dateTime } = req.body;
-    if (!autoresGuardados.includes(author)) {
+    let autorExistente = false;
+
+    for (const autor of autoresGuardados) {
+        if (autor === author) {
+            autorExistente = true;
+            break;
+        }
+    }
+
+    if (!autorExistente) {
         autoresGuardados.push(author);
     }
 
@@ -42,12 +51,19 @@ app.delete('/eliminarAutor', (req, res) => {
     res.json({ status: 'Autor y mensajes eliminados correctamente' });
 });
 
-
 app.put('/editarPost', (req, res) => {
     const { originalMessage, editedMessage } = req.body;
-    const postAEditar = postsGuardados.find(post => post.message === originalMessage);
-    if (postAEditar) {
-        postAEditar.message = editedMessage;
+    let postEncontrado = false;
+
+    for (const post of postsGuardados) {
+        if (post.message === originalMessage) {
+            post.message = editedMessage;
+            postEncontrado = true;
+            break;
+        }
+    }
+
+    if (postEncontrado) {
         res.json({ status: 'Post editado correctamente' });
     } else {
         res.status(404).json({ status: 'Post no encontrado' });
@@ -56,16 +72,8 @@ app.put('/editarPost', (req, res) => {
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-
-    if (username && password) {
-        if (password === '123') {
-            res.json({ success: true, message: 'Autenticación exitosa' });
-        } else {
-            res.json({ success: false, message: 'La autenticación falló' });
-        }
-    } else {
-        res.json({ success: false, message: 'Nombre de usuario y contraseña son requeridos' });
-    }
+    const success = username && password && password === '123';
+    res.json({ success, message: success ? 'Autenticación exitosa' : 'La autenticación falló' });
 });
 
 app.listen(port, () => {
